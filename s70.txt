@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRIFT — Modern Fashion for Boys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14120F;
+    --paper: #F2EEE6;
+    --flame: #FF4B1F;
+    --teal: #1F3B3A;
+    --dust: #8B877E;
+    --line: #DAD4C6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display {
+    font-family: 'Archivo Black', sans-serif;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 0;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .nav .logo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+  }
+
+  .nav .logo span { color: var(--flame); }
+
+  .nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    font-weight: 600;
+    font-size: 14.5px;
+  }
+
+  .nav a { color: var(--ink); text-decoration: none; }
+
+  .nav ul { display: none; }
+  @media (min-width: 720px) { .nav ul { display: flex; } }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    padding: 60px 0 70px;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 44px 0 52px; }
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 7vw, 84px);
+    letter-spacing: -0.01em;
+  }
+
+  .hero .stroke { -webkit-text-stroke: 2px var(--ink); color: var(--paper); }
+
+  .hero .sub {
+    margin-top: 22px;
+    font-size: 17px;
+    color: #45433C;
+    max-width: 46ch;
+  }
+
+  .hero .tag-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 7px 13px;
+    border: 1.5px solid var(--ink);
+    border-radius: 100px;
+  }
+
+  .hero-panel {
+    aspect-ratio: 4/5;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    background: var(--teal);
+  }
+
+  .hero-panel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .hero-panel .caption {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    color: var(--paper);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-panel .caption small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+    margin-top: 3px;
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee {
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+
+  .marquee-track {
+    display: inline-block;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 16px;
+    animation: scroll 22s linear infinite;
+  }
+
+  .marquee-track span { margin: 0 22px; color: var(--flame); }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- CATEGORY GRID ---------- */
+  .section { padding: 70px 0; }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 34px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 18px;
+  }
+
+  .section-head h2 { font-size: clamp(28px, 4vw, 42px); }
+
+  .section-head .count {
+    font-weight: 700;
+    color: var(--dust);
+    font-size: 14px;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  @media (max-width: 860px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .cat-card {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .cat-card .art {
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cat-card .art svg { width: 58%; height: 58%; }
+
+  .cat-card .info {
+    padding: 14px 16px 18px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .cat-card .info h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  .cat-card .info p {
+    font-size: 13px;
+    color: var(--dust);
+    margin-top: 4px;
+  }
+
+  /* ---------- LOOKBOOK ---------- */
+  .lookbook {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 860px) { .lookbook { grid-template-columns: 1fr 1fr; } }
+
+  .look-panel {
+    aspect-ratio: 3/4;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .look-panel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .look-panel .num {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 13px;
+    color: var(--paper);
+    background: rgba(20,18,15,0.55);
+    padding: 4px 9px;
+    border-radius: 100px;
+  }
+
+  .look-panel .tag-label {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    color: var(--paper);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* ---------- STYLE NOTES ---------- */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  @media (max-width: 860px) { .notes-grid { grid-template-columns: 1fr; } }
+
+  .note h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .note .num-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background: var(--flame);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .note p { font-size: 15.5px; color: #45433C; }
+
+  /* ---------- SIZE STRIP ---------- */
+  .size-strip {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    padding: 42px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  @media (max-width: 720px) { .size-strip { grid-template-columns: 1fr; } }
+
+  .size-strip h2 { font-size: clamp(26px, 4vw, 36px); margin-bottom: 14px; }
+
+  .size-strip p { color: #C9C5BA; font-size: 15px; max-width: 42ch; }
+
+  .size-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  .size-table th, .size-table td {
+    border: 1px solid #3A3833;
+    padding: 9px 10px;
+    text-align: center;
+  }
+
+  .size-table th {
+    background: #201E19;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 11.5px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quote-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 860px) { .quote-grid { grid-template-columns: 1fr; } }
+
+  .quote-card {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    padding: 24px;
+  }
+
+  .quote-card p.q {
+    font-size: 15.5px;
+    margin-bottom: 16px;
+  }
+
+  .quote-card .who {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: var(--teal);
+  }
+
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter {
+    border: 3px solid var(--ink);
+    border-radius: 6px;
+    padding: 44px 36px;
+    text-align: center;
+  }
+
+  .newsletter h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 12px; }
+
+  .newsletter p { color: #45433C; margin-bottom: 24px; }
+
+  .newsletter form {
+    display: flex;
+    gap: 10px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .newsletter input {
+    flex: 1;
+    padding: 13px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+  }
+
+  .newsletter button {
+    background: var(--flame);
+    color: var(--paper);
+    border: none;
+    border-radius: 100px;
+    padding: 13px 24px;
+    font-weight: 700;
+    font-size: 14.5px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 480px) {
+    .newsletter form { flex-direction: column; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 3px solid var(--ink);
+    padding: 40px 0 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 13.5px;
+    color: var(--dust);
+  }
+
+  footer .logo {
+    font-family: 'Archivo Black', sans-serif;
+    color: var(--ink);
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="nav">
+    <div class="logo">DRIFT<span>.</span></div>
+    <ul>
+      <li><a href="#new">New Drops</a></li>
+      <li><a href="#categories">Shop</a></li>
+      <li><a href="#lookbook">Lookbook</a></li>
+      <li><a href="#sizing">Sizing</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <h1 class="display">Street<br>ready.<br><span class="stroke">Every</span> day.</h1>
+      <p class="sub">Modern fashion built for how boys actually move — layered fits, honest fabric, and pieces that hold up from the school gate to the skate park.</p>
+      <div class="tag-row">
+        <span class="tag">New season</span>
+        <span class="tag">Sizes 8–18</span>
+        <span class="tag">Built to layer</span>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="500" fill="#1F3B3A"/>
+        <g stroke="#F2EEE6" stroke-width="1" opacity="0.18">
+          <line x1="0" y1="60" x2="400" y2="60"/>
+          <line x1="0" y1="140" x2="400" y2="140"/>
+          <line x1="0" y1="220" x2="400" y2="220"/>
+          <line x1="0" y1="300" x2="400" y2="300"/>
+          <line x1="0" y1="380" x2="400" y2="380"/>
+          <line x1="0" y1="460" x2="400" y2="460"/>
+        </g>
+        <g transform="translate(200 250)">
+          <!-- boxy hoodie silhouette -->
+          <path d="M-90 -40 L-50 -100 L-20 -90 Q0 -80 20 -90 L50 -100 L90 -40 L60 -20 L60 140 L-60 140 L-60 -20 Z" fill="#FF4B1F"/>
+          <circle cx="0" cy="-95" r="22" fill="#F2EEE6" opacity="0.9"/>
+          <path d="M-20 -90 Q0 -60 20 -90" stroke="#1F3B3A" stroke-width="4" fill="none"/>
+        </g>
+      </svg>
+      <div class="caption">Layer 01<small>Heavyweight hoodie, boxy fit</small></div>
+    </div>
+  </section>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    NEW DROPS WEEKLY <span>•</span> BUILT TO LAST <span>•</span> SIZES 8–18 <span>•</span> FREE EXCHANGES <span>•</span> NEW DROPS WEEKLY <span>•</span> BUILT TO LAST <span>•</span> SIZES 8–18 <span>•</span> FREE EXCHANGES <span>•</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="section" id="categories">
+    <div class="section-head">
+      <h2 class="display">Shop by category</h2>
+      <span class="count">04 collections</span>
+    </div>
+    <div class="cat-grid">
+
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#14120F" stroke-width="2.2">
+            <path d="M22 30 L38 15 L50 22 L62 15 L78 30 L68 42 L68 88 L32 88 L32 42 Z"/>
+            <path d="M38 15 Q50 32 62 15" />
+          </svg>
+        </div>
+        <div class="info">
+          <h3>Hoodies &amp; Fleece</h3>
+          <p>Heavyweight, brushed-inside, built for layering</p>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#14120F" stroke-width="2.2">
+            <path d="M30 15 H70 L74 40 L64 44 L64 88 H36 V44 L26 40 Z"/>
+            <line x1="42" y1="15" x2="42" y2="88"/>
+            <line x1="58" y1="15" x2="58" y2="88"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>Denim</h3>
+          <p>Stone-washed straight and tapered fits</p>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#14120F" stroke-width="2.2">
+            <path d="M15 70 Q15 55 30 55 L34 40 Q36 34 44 34 H70 Q78 34 80 42 L84 60 Q86 70 76 72 Z"/>
+            <line x1="34" y1="55" x2="70" y2="55"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>Footwear</h3>
+          <p>Court classics and everyday trainers</p>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#14120F" stroke-width="2.2">
+            <path d="M50 20 Q75 20 78 45 Q80 60 65 60 H35 Q20 60 22 45 Q25 20 50 20 Z"/>
+            <circle cx="50" cy="45" r="6"/>
+            <path d="M22 45 Q10 48 15 60"/>
+            <path d="M78 45 Q90 48 85 60"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>Caps &amp; Bags</h3>
+          <p>Finishing pieces for the everyday fit</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="lookbook">
+    <div class="section-head">
+      <h2 class="display">This week's fits</h2>
+      <span class="count">03 looks</span>
+    </div>
+    <div class="lookbook">
+
+      <div class="look-panel">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="400" fill="#8B4A3B"/>
+          <g stroke="#F2EEE6" stroke-width="1" opacity="0.15">
+            <line x1="0" y1="50" x2="300" y2="50"/><line x1="0" y1="120" x2="300" y2="120"/>
+            <line x1="0" y1="190" x2="300" y2="190"/><line x1="0" y1="260" x2="300" y2="260"/>
+            <line x1="0" y1="330" x2="300" y2="330"/>
+          </g>
+          <path d="M110 130 L140 90 L160 100 L180 90 L210 130 L195 150 L195 320 L105 320 L105 150 Z" fill="#14120F" opacity="0.85"/>
+          <rect x="120" y="320" width="60" height="55" fill="#F2EEE6" opacity="0.9"/>
+        </svg>
+        <div class="num">01</div>
+        <div class="tag-label">Court Fit — hoodie &amp; joggers</div>
+      </div>
+
+      <div class="look-panel">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="400" fill="#1F3B3A"/>
+          <g stroke="#F2EEE6" stroke-width="1" opacity="0.15">
+            <line x1="0" y1="50" x2="300" y2="50"/><line x1="0" y1="120" x2="300" y2="120"/>
+            <line x1="0" y1="190" x2="300" y2="190"/><line x1="0" y1="260" x2="300" y2="260"/>
+            <line x1="0" y1="330" x2="300" y2="330"/>
+          </g>
+          <rect x="105" y="110" width="90" height="120" fill="#FF4B1F" opacity="0.9"/>
+          <rect x="112" y="230" width="76" height="120" fill="#14120F" opacity="0.85"/>
+        </svg>
+        <div class="num">02</div>
+        <div class="tag-label">Layer Up — jacket &amp; denim</div>
+      </div>
+
+      <div class="look-panel">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="400" fill="#FF4B1F"/>
+          <g stroke="#14120F" stroke-width="1" opacity="0.12">
+            <line x1="0" y1="50" x2="300" y2="50"/><line x1="0" y1="120" x2="300" y2="120"/>
+            <line x1="0" y1="190" x2="300" y2="190"/><line x1="0" y1="260" x2="300" y2="260"/>
+            <line x1="0" y1="330" x2="300" y2="330"/>
+          </g>
+          <circle cx="150" cy="150" r="45" fill="#F2EEE6" opacity="0.9"/>
+          <rect x="110" y="200" width="80" height="150" fill="#14120F" opacity="0.85"/>
+        </svg>
+        <div class="num">03</div>
+        <div class="tag-label">Weekend — cap &amp; tee set</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 class="display">How to wear it</h2>
+      <span class="count">Style notes</span>
+    </div>
+    <div class="notes-grid">
+      <div class="note">
+        <h3><span class="num-badge">1</span>Layer heavy over light</h3>
+        <p>Put the heavier piece — the hoodie or jacket — over a plain, lighter tee. It keeps the fit from feeling bulky no matter the size.</p>
+      </div>
+      <div class="note">
+        <h3><span class="num-badge">2</span>Match one loud piece</h3>
+        <p>Pick one item to stand out — the cap, the sneakers, or the jacket — and keep the rest of the outfit in solid, quiet colours.</p>
+      </div>
+      <div class="note">
+        <h3><span class="num-badge">3</span>Let denim break naturally</h3>
+        <p>A slight break at the ankle over the sneaker looks better than a hard crease — go one size true rather than long.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sizing">
+    <div class="size-strip">
+      <div>
+        <h2 class="display">Sizing, sorted</h2>
+        <p>Every piece is cut for growing frames — true to age sizing from 8 to 18, with a size-up note if your kid runs long or lean.</p>
+      </div>
+      <table class="size-table">
+        <tr><th>Age</th><th>8–9</th><th>10–11</th><th>12–13</th><th>14–15</th><th>16–18</th></tr>
+        <tr><td>Height (cm)</td><td>128–134</td><td>140–146</td><td>152–158</td><td>164–170</td><td>176–182</td></tr>
+        <tr><td>Chest (cm)</td><td>64–66</td><td>68–71</td><td>74–78</td><td>82–86</td><td>90–94</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 class="display">What families say</h2>
+      <span class="count">Reader notes</span>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-card">
+        <p class="q">"The hoodie fabric is thick enough that it's survived an entire winter of daily wear without pilling."</p>
+        <div class="who">— Parent, age 11 fit</div>
+      </div>
+      <div class="quote-card">
+        <p class="q">"Sizing ran true for once — didn't have to guess between two ages like most other brands."</p>
+        <div class="who">— Parent, age 14 fit</div>
+      </div>
+      <div class="quote-card">
+        <p class="q">"He picked out the whole outfit himself and it still matched — that almost never happens."</p>
+        <div class="who">— Parent, age 9 fit</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="new">
+    <div class="newsletter">
+      <h2 class="display">Get the next drop first</h2>
+      <p>New styles land most Fridays. No spam, just the pieces before they sell out.</p>
+      <form onsubmit="event.preventDefault();">
+        <input type="email" placeholder="you@email.com" required>
+        <button type="submit">Notify me</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">DRIFT.</div>
+    <div>Modern fashion for boys, sizes 8–18.</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
